@@ -3,8 +3,8 @@
 
 /**
  * main - prints "programming is like building a multilingal puzzle, 
- * followed by a new line"
- * retirn o. 
+ * followed by a new line
+ * Return should be 0
  */
 
 int main(void)
