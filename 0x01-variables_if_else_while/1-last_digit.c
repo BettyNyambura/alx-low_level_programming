@@ -4,7 +4,7 @@
 #include <stdio.h>
 /**
  * main - entry point
- * Return: Always 
+ * Return: Always
  */
 
 /* betty style doc for function main goes there */
