@@ -9,25 +9,30 @@
 
 int main(void)
 {
-	int pass[100];
-	int i, sum, n;
+	char pass[100];
+	int i, sum = 0, target = 2772;
 
 	sum = 0;
 
 	srand(time(NULL));
 
-	for (i = 0; i < 100; i++)
+	for (i = 0; i < 99; i++)
 	{
-	pass[i] = rand() % 78;
-	sum += (pass[i] + '0');
+	pass[i] = rand() % 94 + 33;
+	sum += pass[i];
 	putchar(pass[i]);
-	if ((2772 - sum) - '0' < 78)
+	if (sum >= target - 33)
 	{
-	n = 2772 - sum - '0';
-	sum += n;
-	putchar(n + '0');
 	break;
 	}
 	}
+	if (sum < target)
+	{
+	pass[i] = target - sum;
+	sum += pass[i];
+	putchar(pass[i]);
+	}
+	pass[i + 1] = '\0';
+	printf("%s\n", pass);
 	return (0);
 }
