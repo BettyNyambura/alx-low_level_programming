@@ -1,19 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 /**
- * free_listint - Add new node at end of a liked list.
- * @head: head of the linked list.
- *
- * Return: nothing.
+ * free_listint - function to free list
+ * @head: pointer to the list
+ * Return: void
  */
-
 void free_listint(listint_t *head)
 {
+	listint_t *freed;
+
 	while (head != NULL)
 	{
-		free(head);
+		freed = head;
 		head = head->next;
+		free(freed);
 	}
 }
