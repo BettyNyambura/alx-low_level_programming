@@ -1,40 +1,66 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
+#include <stdlib.h>
 
 /**
- * free_listint_safe - function to free list
- * @h: pointer to the pointer of the list
- * Return: count
+ * find_listint_loop_fl - finds a loop in a linked list
+ *
+ * @head: linked list to search
+ *
+ * Return: address of node where loop starts/returns, NULL if no loop
+ */
+listint_t *find_listint_loop_fl(listint_t *head)
+{
+	listint_t *ptr, *end;
+
+	if (head == NULL)
+		return (NULL);
+
+	for (end = head->next; end != NULL; end = end->next)
+	{
+		if (end == end->next)
+			return (end);
+		for (ptr = head; ptr != end; ptr = ptr->next)
+			if (ptr == end->next)
+				return (end->next);
+	}
+	return (NULL);
+}
+
+/**
+ * free_listint_safe - frees a listint list, even if it has a loop
+ *
+ * @h: head of list
+ *
+ * Return: number of nodes freed
  */
 size_t free_listint_safe(listint_t **h)
 {
-	size_t count_new = 0, count_comp = 0;
-	listint_t *tmp, *head, *comp;
+	listint_t *next, *loopnode;
+	size_t len;
+	int loop = 1;
 
 	if (h == NULL || *h == NULL)
 		return (0);
-	head = comp = tmp = *h;
-	count_new = 0;
-	while (head != NULL)
+
+	loopnode = find_listint_loop_fl(*h);
+	for (len = 0; (*h != loopnode || loop) && *h != NULL; *h = next)
 	{
-		comp = *h;
-		count_comp = 0;
-		while (count_new > count_comp)
+		len++;
+		next = (*h)->next;
+		if (*h == loopnode && loop)
 		{
-			if (tmp == comp)
+			if (loopnode == loopnode->next)
 			{
-				*h = NULL;
-				return (count_new);
+				free(*h);
+				break;
 			}
-			count_comp++;
-			comp = comp->next;
+			len++;
+			next = next->next;
+			free((*h)->next);
+			loop = 0;
 		}
-		count_new++;
-		tmp = head->next;
-		free((void *)head);
-		head = tmp;
+		free(*h);
 	}
-	*h = tmp;
-	return (count_new);
+	*h = NULL;
+	return (len);
 }
