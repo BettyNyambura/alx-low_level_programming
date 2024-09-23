@@ -7,7 +7,6 @@
  * _strcpy - function
  * @dest: char
  * @src: char
- * @n: integer
  * Return: 0
  */
 char *_strcpy(char *dest, char *src)
