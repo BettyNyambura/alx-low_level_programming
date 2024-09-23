@@ -3,8 +3,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
-int _isupper(int c)
+/**
+ * _islower - function
+ * @c: integer
+ * Return: 0
+ */
+int _islower(int c)
 {
 	return (c >= 'a' && c <= 'z');
 }

@@ -3,7 +3,11 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
+/**
+ * _isalpha - function
+ * @c: integer
+ * Return: 0
+ */
 int _isalpha(int c)
 {
 	return (isalpha(c));
